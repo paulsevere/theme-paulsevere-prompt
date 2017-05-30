@@ -45,7 +45,11 @@ function __simple_ass_prompt_git -d "Display the actual git branch"
     printf '%s ' $git_branch
 
     set state (__simple_ass_prompt_parse_git_branch_state)
-    set_color 0087ff
+    if git_is_touched
+      set_color f48d8d
+    else
+      set_color 47dfb6
+    end
     printf '[%s]' $state
 
     set_color normal
@@ -101,14 +105,14 @@ function fish_prompt
   __simple_ass_prompt_git
 
   # Line 2
-  echo
-  if test -e "Cargo.toml"
-    printf "(rust:%s) " (set_color red)(rustup show | tail -n 3 | head -n 1 |  cut -d '-' -f 1)(set_color normal)
-  end
+  # echo
+  # if test -e "Cargo.toml"
+  #   printf "(rust:%s) " (set_color red)(rustup show | tail -n 3 | head -n 1 |  cut -d '-' -f 1)(set_color normal)
+  # end
 
-  if test $VIRTUAL_ENV
-    printf "(python:%s) " (set_color blue)(basename $VIRTUAL_ENV)(set_color normal)
-  end
+  # if test $VIRTUAL_ENV
+  #   printf "(python:%s) " (set_color blue)(basename $VIRTUAL_ENV)(set_color normal)
+  # end
 
   if test $code -eq 127
     set_color red
