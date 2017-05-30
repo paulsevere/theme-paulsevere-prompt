@@ -38,8 +38,6 @@ function __simple_ass_prompt_git -d "Display the actual git branch"
 
   if git_is_repo; and test -z $is_dot_git
     printf 'on '
-    set_color purple
-
     set -l git_branch (command git symbolic-ref --quiet --short HEAD 2> /dev/null; or git rev-parse --short HEAD 2> /dev/null; or echo -n '(unknown)')
     if git_is_touched
       set_color f48d8d
