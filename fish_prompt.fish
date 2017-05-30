@@ -40,10 +40,11 @@ function __simple_ass_prompt_git -d "Display the actual git branch"
     printf 'on '
     set -l git_branch (command git symbolic-ref --quiet --short HEAD 2> /dev/null; or git rev-parse --short HEAD 2> /dev/null; or echo -n '(unknown)')
     if git_is_touched
-      set_color f48d8d
+      set_color red
     else
-      set_color 47dfb6
+      set_color blue
     end
+    printf '%s ' $git_branch
     printf '%s ' $git_branch
 
     set state (__simple_ass_prompt_parse_git_branch_state)
